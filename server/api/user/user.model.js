@@ -17,6 +17,8 @@ var UserSchema = new Schema({
   password: String,
   provider: String,
   salt: String,
+
+  interests: [String]
 });
 
 

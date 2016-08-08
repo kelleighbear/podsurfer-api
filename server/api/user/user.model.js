@@ -18,7 +18,8 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
 
-  interests: [String]
+  interests: [String],
+  bookmarks: [String]
 });
 
 

@@ -1,15 +1,15 @@
 'use strict';
 
 const Router = require('express').Router;
-const controller = require('./podcast.controller');
+const controller = require('./review.controller');
 const auth = require('../../auth/auth.service');
 
 
 var router = new Router();
 
 // Endpoints
-router.get('/:id', controller.getOne);
-router.get('/', controller.getAll);
+router.get('/mine', auth.isAuthenticated(), controller.getMine);
+router.get('/:id', controller.getForPodcast);
 
 router.post('/', auth.isAuthenticated(), controller.create);
 

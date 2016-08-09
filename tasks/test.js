@@ -1,6 +1,6 @@
 (function IIFE() {
   'use strict';
-
+  require('babel-core/register');
   module.exports = function(gulp, config, plugins) {
     return function() {
       process.env.NODE_ENV = 'test';

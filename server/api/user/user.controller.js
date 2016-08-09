@@ -30,6 +30,9 @@ function handleError(res, statusCode) {
  * Creates a new user
  */
 function create(req, res, next) {
+  if(!req.body.name || !req.body.email) {
+    return res.status(422).send('Users must have a name and email.');
+  }
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';

@@ -53,6 +53,9 @@ function getOne(req, res) {
 * Create new podcast
 */
 function create(req, res) {
+  if(!req.body.name || !req.body.description) {
+    res.status(500).send('Podcast must have a name and description.');
+  }
   var newPodcast = new Podcast(req.body);
   newPodcast.save()
     .then(function(podcast) {

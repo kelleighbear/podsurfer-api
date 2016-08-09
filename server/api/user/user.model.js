@@ -18,7 +18,10 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   interests: [String],
-  bookmarks: [String]
+  bookmarks: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Podcast'
+  }]
 });
 
 

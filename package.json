@@ -5,8 +5,10 @@
   "main": "server/app.js",
   "private": true,
   "dependencies": {
+    "babel-core": "^6.13.2",
     "bluebird": "^3.4.1",
     "body-parser": "^1.14.0",
+    "chai": "^3.5.0",
     "chalk": "^1.1.1",
     "composable-middleware": "^0.3.0",
     "compression": "^1.5.2",
@@ -22,7 +24,8 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "ramda": "^0.17.1"
+    "ramda": "^0.17.1",
+    "supertest": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",

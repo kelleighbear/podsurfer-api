@@ -59,7 +59,7 @@ describe('Review Controller', function() {
         return Review.remove();
     });
 
-    describe('POST /api/podcast/', function() {
+    describe('POST /api/review', function() {
         var token;
 
         before(function(done) {
@@ -76,6 +76,12 @@ describe('Review Controller', function() {
                     token = res.body.token;
                     done();
                 });
+        });
+
+        it('should fail to create a review when not authenticated', function(done) {
+            request(app)
+                .post('/api/review')
+                .expect(401, done);
         });
 
         it('should fail to create a review with no podcast ID', function(done) {
@@ -143,7 +149,7 @@ describe('Review Controller', function() {
         });
     });
 
-    describe('GET /api/podcast/:id', function() {
+    describe('GET /api/review/:id', function() {
         it('should fail to get reviews for a podcast with invalid ID', function(done) {
             request(app)
                 .get('/api/review/12345')
@@ -169,35 +175,41 @@ describe('Review Controller', function() {
     });
 
     describe('GET /api/review/mine', function() {
-      var token;
+        var token;
 
-      before(function(done) {
-          request(app)
-              .post('/auth/local')
-              .send({
-                  email: 'test@example.com',
-                  password: 'password0W#'
-              })
-              .expect(200)
-              .expect('Content-Type', /json/)
-              .end((err, res) => {
-                  expect(err).to.not.exist;
-                  token = res.body.token;
-                  done();
-              });
-      });
+        before(function(done) {
+            request(app)
+                .post('/auth/local')
+                .send({
+                    email: 'test@example.com',
+                    password: 'password0W#'
+                })
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    token = res.body.token;
+                    done();
+                });
+        });
 
-      it('should get all my reviews', function(done) {
-          request(app)
-              .get('/api/review/mine')
-              .set('authorization', 'Bearer ' + token)
-              .expect(200)
-              .end((err, res) => {
-                  let result = res.body;
-                  expect(result.length).to.equal(1);
-                  done();
-              });
-      });
+        it('should fail to get my reviews when not authenticated', function(done) {
+            request(app)
+                .get('/api/review/mine')
+                .expect(401, done);
+        });
+
+        it('should get all my reviews', function(done) {
+            request(app)
+                .get('/api/review/mine')
+                .set('authorization', 'Bearer ' + token)
+                .expect(200)
+                .end((err, res) => {
+                    let result = res.body;
+                    expect(result.length).to.equal(1);
+                    done();
+                });
+        });
     });
 
     describe('PUT /api/review/:id', function() {
@@ -217,6 +229,12 @@ describe('Review Controller', function() {
                     token = res.body.token;
                     done();
                 });
+        });
+
+        it('should fail to update a review when not authenticated', function(done) {
+            request(app)
+                .put('/api/review/' + review1._id)
+                .expect(401, done);
         });
 
         it('should fail to update a review with invalid ID', function(done) {
@@ -246,7 +264,7 @@ describe('Review Controller', function() {
 
         it('should update a review', function(done) {
             let updates = {
-              episode: 1
+                episode: 1
             };
             request(app)
                 .put('/api/review/' + review2._id)
@@ -264,7 +282,7 @@ describe('Review Controller', function() {
     });
 
     describe('DELETE /api/review/:id', function() {
-      var token;
+        var token;
 
         before(function(done) {
             request(app)
@@ -280,6 +298,12 @@ describe('Review Controller', function() {
                     token = res.body.token;
                     done();
                 });
+        });
+
+        it('should fail to create a podcast when not authenticated', function(done) {
+            request(app)
+                .delete('/api/review/' + review2._id)
+                .expect(401, done);
         });
 
         it('should fail to delete a review with invalid ID', function(done) {

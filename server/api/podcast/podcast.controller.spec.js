@@ -49,7 +49,7 @@ describe('Podcast Controller', function() {
 
     // Clear podcasts after testing
     after(function() {
-      return Podcast.remove();
+        return Podcast.remove();
     });
 
     describe('POST /api/podcast/', function() {
@@ -69,6 +69,12 @@ describe('Podcast Controller', function() {
                     token = res.body.token;
                     done();
                 });
+        });
+
+        it('should fail to create a podcast when not authenticated', function(done) {
+            request(app)
+                .post('/api/podcast')
+                .expect(401, done);
         });
 
         it('should fail to create a podcast with no name', function(done) {
@@ -111,11 +117,24 @@ describe('Podcast Controller', function() {
     });
 
     describe('GET /api/podcast/', function() {
-      it('should fail to get a podcast with invalid ID', function(done) {
-          request(app)
-              .get('/api/podcast/12345')
-              .expect(500, done);
-      });
+        it('should get all podcasts', function(done) {
+            request(app)
+                .get('/api/podcast/')
+                .expect(200)
+                .end((err, res) => {
+                    let result = res.body;
+                    expect(result.length).to.equal(3);
+                    done();
+                });
+        });
+    });
+
+    describe('GET /api/podcast/:id', function() {
+        it('should fail to get a podcast with invalid ID', function(done) {
+            request(app)
+                .get('/api/podcast/12345')
+                .expect(500, done);
+        });
 
         it('should get a podcast', function(done) {
             request(app)
@@ -125,17 +144,6 @@ describe('Podcast Controller', function() {
                     let result = res.body;
                     expect(result.name).to.equal('TylerPodcast');
                     expect(result.description).to.equal('A thrilling podcast detailing the life of Tyler Estes.');
-                    done();
-                });
-        });
-
-        it('should get all podcasts', function(done) {
-            request(app)
-                .get('/api/podcast/')
-                .expect(200)
-                .end((err, res) => {
-                    let result = res.body;
-                    expect(result.length).to.equal(3);
                     done();
                 });
         });
@@ -160,9 +168,15 @@ describe('Podcast Controller', function() {
                 });
         });
 
+        it('should fail to update a podcast when not authenticated', function(done) {
+            request(app)
+                .post('/api/podcast')
+                .expect(401, done);
+        });
+
         it('should fail to update a podcast with invalid ID', function(done) {
             let updates = {
-              name: 'Tyler\'s Podcast'
+                name: 'Tyler\'s Podcast'
             };
             request(app)
                 .put('/api/podcast/12345')
@@ -173,7 +187,7 @@ describe('Podcast Controller', function() {
 
         it('should fail to update a podcast with no ID', function(done) {
             let updates = {
-              name: 'Tyler\'s Podcast'
+                name: 'Tyler\'s Podcast'
             };
             request(app)
                 .put('/api/podcast/')
@@ -184,7 +198,7 @@ describe('Podcast Controller', function() {
 
         it('should update a podcast', function(done) {
             let updates = {
-              name: 'Tyler\'s Podcast'
+                name: 'Tyler\'s Podcast'
             };
             request(app)
                 .put('/api/podcast/' + podcast1._id)
@@ -201,7 +215,7 @@ describe('Podcast Controller', function() {
     });
 
     describe('DELETE /api/podcast/:id', function() {
-      var token;
+        var token;
 
         before(function(done) {
             request(app)
@@ -217,6 +231,12 @@ describe('Podcast Controller', function() {
                     token = res.body.token;
                     done();
                 });
+        });
+
+        it('should fail to create a podcast when not authenticated', function(done) {
+            request(app)
+                .delete('/api/podcast/' + podcast2._id)
+                .expect(401, done);
         });
 
         it('should fail to delete a podcast with invalid ID', function(done) {

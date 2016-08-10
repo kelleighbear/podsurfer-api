@@ -16,6 +16,6 @@ router.post('/', controller.create);
 router.put('/', auth.isAuthenticated(), controller.update);
 
 // DELETE
-
+// no delete endpoint needed
 
 module.exports = router;

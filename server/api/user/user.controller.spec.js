@@ -41,9 +41,7 @@ describe('User Controller', function() {
         .send(user2)
         .expect(422, done);
     });
-  });
 
-  describe('POST /api/user', function() {
     it('should fail to create a user with an invalid email', function(done) {
       let user2 = new User({
         name: 'Fake User2',
@@ -55,9 +53,7 @@ describe('User Controller', function() {
         .send(user2)
         .expect(422, done);
     });
-  });
 
-  describe('POST /api/user', function() {
     it('should fail to create a user with no name', function(done) {
       let user2 = new User({
         email: 'test@test.com',
@@ -68,9 +64,7 @@ describe('User Controller', function() {
         .send(user2)
         .expect(422, done);
     });
-  });
-
-  describe('POST /api/user', function() {
+    
     it('should create a valid user', function(done) {
       let user2 = new User({
         name: 'Kelleigh Laine',

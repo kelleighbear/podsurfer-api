@@ -1,8 +1,6 @@
 'use strict';
 
 const Review = require('./review.model');
-const config = require('../../config/environment');
-const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
 module.exports = {
@@ -55,8 +53,8 @@ function getForPodcast(req, res) {
  * Create new podcast
  */
 function create(req, res) {
-    if(!req.body.podcast || !req.body.review | !req.body.rating) {
-      return res.status(500).send('Review must include podcast id, rating, and text.')
+    if(!req.body.podcast || !req.body.review || !req.body.rating) {
+      return res.status(500).send('Review must include podcast id, rating, and text.');
     }
     var newReview = new Review(req.body);
     newReview.reviewer = {
@@ -120,7 +118,7 @@ function destroy(req, res) {
                     })
                     .catch(handleError(res));
             } else {
-                return res.status(500).send('This is not your review - you cannot delete it.')
+                return res.status(500).send('This is not your review - you cannot delete it.');
             }
         });
 }

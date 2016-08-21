@@ -30,8 +30,8 @@ function handleError(res, statusCode) {
  * @api {get} podcast/ Get all the podcasts
  * @apiName getAll
  * @apiGroup Podcast
- * @apiSuccess {ObjectId} _id
- * @apiSuccess {Object[]} podcasts
+ * @apiSuccess {ObjectId} _id the podcast's unique ID
+ * @apiSuccess {Object[]} podcasts array of podcasts
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     [{
@@ -90,16 +90,16 @@ function getAll(req, res) {
  * @api {get} podcast/:id Get one podcast
  * @apiName getOne
  * @apiGroup Podcast
- * @apiSuccess {ObjectId} _id
- * @apiSuccess {String} name
- * @apiSuccess {String} link
- * @apiSuccess {Date} release
- * @apiSuccess {String} producer
- * @apiSuccess {String} length
- * @apiSuccess {String} description
- * @apiSuccess {Object[]} episodes
- * @apiSuccess {String[]} tags
- * @apiSuccess {String} imageUrl
+ * @apiSuccess {ObjectId} _id the podcast's unique ID
+ * @apiSuccess {String} name the podcast name
+ * @apiSuccess {String} link the link to listen to the podcast
+ * @apiSuccess {Date} release the date the podcast was released
+ * @apiSuccess {String} producer the podcast producer
+ * @apiSuccess {String} length the length of the podcast - this could be the total number of episodes, or the time length, you choose
+ * @apiSuccess {String} description the description or summary of the podcast
+ * @apiSuccess {Object[]} episodes the array of episodes associated with the podcast
+ * @apiSuccess {String[]} tags short words or phrases to help find a podcast, such as category or content
+ * @apiSuccess {String} imageUrl a link to a picture to use for the podcast
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -142,18 +142,25 @@ function getOne(req, res) {
  * @apiName create
  * @apiGroup Podcast
  * @apiPermission must be logged in
- * @apiParam {String} name
- * @apiParam {String} description
- * @apiSuccess {ObjectId} _id
- * @apiSuccess {String} name
- * @apiSuccess {String} link
- * @apiSuccess {Date} release
- * @apiSuccess {String} producer
- * @apiSuccess {String} length
- * @apiSuccess {String} description
- * @apiSuccess {Object[]} episodes
- * @apiSuccess {String[]} tags
- * @apiSuccess {String} imageUrl
+ * @apiParam {String} name (required) the podcast name
+ * @apiParam {String} link (optional) the link to listen to the podcast
+ * @apiParam {Date} release (optional) the date the podcast was released
+ * @apiParam {String} producer (optional) the podcast producer
+ * @apiParam {String} length (optional) the length of the podcast - this could be the total number of episodes, or the time length, you choose
+ * @apiParam {String} description (required) the description or summary of the podcast
+ * @apiParam {Object[]} episodes (optional) the array of episodes associated with the podcast
+ * @apiParam {String[]} tags (optional) short words or phrases to help find a podcast, such as category or content
+ * @apiParam {String} imageUrl (optional) a link to a picture to use for the podcast
+ * @apiSuccess {ObjectId} _id the podcast's unique ID
+ * @apiSuccess {String} name the podcast name
+ * @apiSuccess {String} link the link to listen to the podcast
+ * @apiSuccess {Date} release the date the podcast was released
+ * @apiSuccess {String} producer the podcast producer
+ * @apiSuccess {String} length the length of the podcast - this could be the total number of episodes, or the time length, you choose
+ * @apiSuccess {String} description the description or summary of the podcast
+ * @apiSuccess {Object[]} episodes the array of episodes associated with the podcast
+ * @apiSuccess {String[]} tags short words or phrases to help find a podcast, such as category or content
+ * @apiSuccess {String} imageUrl a link to a picture to use for the podcast
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -179,16 +186,26 @@ function create(req, res) {
  * @api {put} podcast/:id Update a podcast
  * @apiName update
  * @apiGroup Podcast
- * @apiSuccess {ObjectId} _id
- * @apiSuccess {String} name
- * @apiSuccess {String} link
- * @apiSuccess {Date} release
- * @apiSuccess {String} producer
- * @apiSuccess {String} length
- * @apiSuccess {String} description
- * @apiSuccess {Object[]} episodes
- * @apiSuccess {String[]} tags
- * @apiSuccess {String} imageUrl
+ * @apiPermission must be logged in
+ * @apiParam {String} name (optional) the podcast name
+ * @apiParam {String} link (optional) the link to listen to the podcast
+ * @apiParam {Date} release (optional) the date the podcast was released
+ * @apiParam {String} producer (optional) the podcast producer
+ * @apiParam {String} length (optional) the length of the podcast - this could be the total number of episodes, or the time length, you choose
+ * @apiParam {String} description (optional) the description or summary of the podcast
+ * @apiParam {Object[]} episodes (optional) the array of episodes associated with the podcast
+ * @apiParam {String[]} tags (optional) short words or phrases to help find a podcast, such as category or content
+ * @apiParam {String} imageUrl (optional) a link to a picture to use for the podcast
+ * @apiSuccess {ObjectId} _id the podcast's unique ID
+ * @apiSuccess {String} name the podcast name
+ * @apiSuccess {String} link the link to listen to the podcast
+ * @apiSuccess {Date} release the date the podcast was released
+ * @apiSuccess {String} producer the podcast producer
+ * @apiSuccess {String} length the length of the podcast - this could be the total number of episodes, or the time length, you choose
+ * @apiSuccess {String} description the description or summary of the podcast
+ * @apiSuccess {Object[]} episodes the array of episodes associated with the podcast
+ * @apiSuccess {String[]} tags short words or phrases to help find a podcast, such as category or content
+ * @apiSuccess {String} imageUrl a link to a picture to use for the podcast
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -239,6 +256,7 @@ function update(req, res, next) {
  * @api {delete} podcast/:id Delete a podcast
  * @apiName destroy
  * @apiGroup Podcast
+ * @apiPermission must be logged in
  */
 function destroy(req, res) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

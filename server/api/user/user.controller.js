@@ -30,12 +30,12 @@ function handleError(res, statusCode) {
  * @api {post} user Create a new user
  * @apiName create
  * @apiGroup User
- * @apiParam {String} name the new user's name
- * @apiParam {String} email the new user's email
- * @apiParam {String} password the new user's password
+ * @apiParam {String} name (required) the new user's name
+ * @apiParam {String} email (required) the new user's email
+ * @apiParam {String} password (required) the new user's password
  * @apiSuccess {ObjectId} _id the new user's id
  * @apiSuccess {String} name the new user's name
- * @apiSuccess {String} email the new user's email
+ * @apiSuccess {String} email the new user's email address
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -66,15 +66,15 @@ function create(req, res, next) {
 }
 
 /**
- * @api {get} user/me Get information about yourself
+ * @api {get} user/me Get information about myself
  * @apiName me
  * @apiGroup User
  * @apiPermission must be logged in
- * @apiSuccess {ObjectId} _id
- * @apiSuccess {String} name,
- * @apiSuccess {String} email
- * @apiSuccess {String[]} interests
- * @apiSuccess {ObjectId[]} bookmarks
+ * @apiSuccess {ObjectId} _id your unique user ID
+ * @apiSuccess {String} name your name
+ * @apiSuccess {String} email your email address
+ * @apiSuccess {String[]} interests an array of your interests
+ * @apiSuccess {ObjectId[]} bookmarks an array of podcast IDs you've bookmarked
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -101,18 +101,27 @@ function me(req, res, next) {
 }
 
 /**
- * @api {put} user/ Update your user profile
+ * @api {put} user/ Update my user profile
  * @apiName update
  * @apiGroup User
  * @apiPermission must be logged in
- * @apiParam {String} name (optional)
- * @apiParam {String[]} interests (optional)
- * @apiParam {ObjectId[]} bookmarks (optional)
- * @apiSuccess {ObjectId} _id
- * @apiSuccess {String} name
- * @apiSuccess {String} email
- * @apiSuccess {String[]} interests
- * @apiSuccess {ObjectId[]} bookmarks
+ * @apiParam {String} name (optional) your name
+ * @apiParam {String[]} interests (optional) an array of your interests
+ * @apiParam {ObjectId[]} bookmarks (optional) bookmarks an array of podcast IDs you've bookmarked
+ * @apiSuccess {ObjectId} _id your unique user ID
+ * @apiSuccess {String} name your name
+ * @apiSuccess {String} email your email address
+ * @apiSuccess {String[]} interests an array of your interests
+ * @apiSuccess {ObjectId[]} bookmarks an array of podcastIDs you've bookmarked
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "_id": "012345678912",
+ *      "name": "Kelleigh Laine",
+ *      "email": "kelleigh.maroney@gmail.com",
+ *      "interests": ["technology", "politics"],
+ *      "bookmarks": ["123456789123", "234567891234"]
+ *     }
  */
 function update(req, res, next) {
   var userId = req.user._id;

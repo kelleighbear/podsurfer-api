@@ -31,7 +31,7 @@ function handleError(res, statusCode) {
  * @apiName getMine
  * @apiGroup Review
  * @apiPermission must be logged in
- * @apiSuccess {Object[]} reviews
+ * @apiSuccess {Object[]} reviews array of reviews you've written
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     [{
@@ -71,10 +71,10 @@ function getMine(req, res) {
 }
 
 /**
-* @api {get} review/:id Get all the reviews for a specitic podcast
+* @api {get} review/:id Get all the reviews for a specific podcast
 * @apiName getForPodcast
 * @apiGroup Review
-* @apiSuccess {Object[]} reviews
+* @apiSuccess {Object[]} reviews array of reviews written for specified podcast
 * @apiSuccessExample {json} Success-Response:
 *     HTTP/1.1 200 OK
 *     [{
@@ -121,20 +121,20 @@ function getForPodcast(req, res) {
 * @apiName getForPodcast
 * @apiGroup Review
 * @apiPermission must be logged in
-* @apiParam {ObjectId} podcast (required)
-* @apiParam {String} name (required)
-* @apiParam {Number} episode (optional - if null, refers to the podcast as a whole, not a specific episode)
-* @apiParam {String} review (required)
-* @apiParam {Number} rating (required)
-* @apiParam {Boolean} spoilers (required)
-* @apiSuccess {ObjectId} _id
-* @apiSuccess {String} name
-* @apiSuccess {ObjectId} podcast
-* @apiSuccess {Number} episode
-* @apiSuccess {Number} rating
-* @apiSuccess {String} review
-* @apiSuccess {Boolean} spoilers
-* @apiSuccess {Object} reviewer
+* @apiParam {ObjectId} podcast (required) ID of podcast the review is for
+* @apiParam {String} name (required) the name or title for the review
+* @apiParam {Number} episode (optional) the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
+* @apiParam {Number} rating (required) the score given to the review - you must decide and control the min/max scores allowed
+* @apiParam {String} review (required) the text of the review
+* @apiParam {Boolean} spoilers (required) flag for whether the review will contain spoilers or not
+* @apiSuccess {ObjectId} _id the review's unique ID
+* @apiSuccess {String} name the name or title for the review
+* @apiSuccess {ObjectId} podcast ID of podcast the review is for
+* @apiSuccess {Number} episode the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
+* @apiSuccess {Number} rating the score given to the review - you must decide and control the min/max scores allowed
+* @apiSuccess {String} review the text of the review
+* @apiSuccess {Boolean} spoilers flag for whether the review will contain spoilers or not
+* @apiSuccess {Object} reviewer the ID and name of the writer of the review
 * @apiSuccessExample {json} Success-Response:
 *     HTTP/1.1 200 OK
 *     [{
@@ -180,24 +180,24 @@ function create(req, res) {
 }
 
 /**
-* @api {put} review/:id Update one of your reviews
+* @api {put} review/:id Update one of my reviews
 * @apiName update
 * @apiGroup Review
 * @apiPermission must be logged in, review must be their own
-* @apiParam {ObjectId} podcast (optional)
-* @apiParam {String} name (optional)
-* @apiParam {Number} episode (optional - if null, refers to the podcast as a whole, not a specific episode)
-* @apiParam {String} review (optional)
-* @apiParam {Number} rating (optional)
-* @apiParam {Boolean} spoilers (optional)
-* @apiSuccess {ObjectId} _id
-* @apiSuccess {String} name
-* @apiSuccess {ObjectId} podcast
-* @apiSuccess {Number} episode
-* @apiSuccess {Number} rating
-* @apiSuccess {String} review
-* @apiSuccess {Boolean} spoilers
-* @apiSuccess {Object} reviewer
+* @apiParam {ObjectId} podcast (optional) ID of podcast the review is for
+* @apiParam {String} name (optional) the name or title for the review
+* @apiParam {Number} episode (optional) the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
+* @apiParam {Number} rating (optional) the score given to the review - you must decide and control the min/max scores allowed
+* @apiParam {String} review (optional) the text of the review
+* @apiParam {Boolean} spoilers (optional) flag for whether the review will contain spoilers or not
+* @apiSuccess {ObjectId} _id the review's unique ID
+* @apiSuccess {String} name the name or title for the review
+* @apiSuccess {ObjectId} podcast ID of podcast the review is for
+* @apiSuccess {Number} episode the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
+* @apiSuccess {Number} rating the score given to the review - you must decide and control the min/max scores allowed
+* @apiSuccess {String} review the text of the review
+* @apiSuccess {Boolean} spoilers flag for whether the review will contain spoilers or not
+* @apiSuccess {Object} reviewer the ID and name of the writer of the review
 * @apiSuccessExample {json} Success-Response:
 *     HTTP/1.1 200 OK
 *     [{
@@ -243,6 +243,7 @@ function update(req, res, next) {
  * @api {delete} review/:id Delete a review
  * @apiName destroy
  * @apiGroup Review
+ * @apiPermission must be logged in, review must be their own
  */
 function destroy(req, res) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

@@ -33,6 +33,7 @@ describe('Review Controller', function() {
                 podcast1 = newPodcast;
                 Promise.resolve();
             })
+            .then(() => Review.remove())
             .then(() => Review.create({
                 podcast: podcast1._id,
                 review: 'A thrilling podcast detailing the life of Tyler Estes... Best thing I\'ve ever listened to in my life',
@@ -116,11 +117,41 @@ describe('Review Controller', function() {
                 .expect(500, done);
         });
 
+        it('should fail to create a review with no name', function(done) {
+            let review = {
+              podcast: podcast1._id,
+              review: 'omg, amazing',
+              rating: 4,
+              spoilers: false
+            };
+            request(app)
+                .post('/api/review')
+                .set('authorization', 'Bearer ' + token)
+                .send(review)
+                .expect(500, done);
+        });
+
+        it('should fail to create a review with no spoilers indicator', function(done) {
+            let review = {
+              podcast: podcast1._id,
+              review: 'omg, amazing',
+              rating: 4,
+              name: 'derp'
+            };
+            request(app)
+                .post('/api/review')
+                .set('authorization', 'Bearer ' + token)
+                .send(review)
+                .expect(500, done);
+        });
+
         it('should create a valid review', function(done) {
             let review = {
                 podcast: podcast1._id,
                 review: 'omg, amazing',
-                rating: 4
+                rating: 4,
+                name: 'derp',
+                spoilers: false
             };
             request(app)
                 .post('/api/review')
@@ -139,7 +170,9 @@ describe('Review Controller', function() {
             let review = {
                 podcast: podcast1._id,
                 review: 'omg, hated it',
-                rating: 3
+                rating: 3,
+                name: 'hello',
+                spoilers: true
             };
             request(app)
                 .post('/api/review')

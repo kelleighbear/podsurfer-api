@@ -28,8 +28,8 @@
       app.use(morgan('dev'));
     }
 
-    app.use('/docs', express.static('docs'));
-    app.set('appPath', path.join(config.root, 'docs'));
+    app.use('/apidocs', express.static('apidocs'));
+    app.set('appPath', path.join(config.root, 'apidocs'));
 
     /* istanbul ignore next */
     if(env === 'development' || env === 'test') {

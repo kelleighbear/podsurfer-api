@@ -11,17 +11,14 @@ var PodcastSchema = new Schema({
     link: String,
     release: Date,
     producer: String,
-    cast: [{
-        actor: String,
-        character: String
-    }],
     length: Number,
     description: String,
     episodes: [{
         name: String,
         link: String,
         description: String,
-        imageUrl: String
+        imageUrl: String,
+        number: Number
     }],
     tags: [String],
     imageURL: String

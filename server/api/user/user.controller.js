@@ -27,7 +27,22 @@ function handleError(res, statusCode) {
 }
 
 /**
- * Creates a new user
+ * @api {post} user Create a new user
+ * @apiName create
+ * @apiGroup User
+ * @apiParam {String} name the new user's name
+ * @apiParam {String} email the new user's email
+ * @apiParam {String} password the new user's password
+ * @apiSuccess {ObjectId} _id the new user's id
+ * @apiSuccess {String} name the new user's name
+ * @apiSuccess {String} email the new user's email
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "_id": "012345678912",
+ *      "name": "Kelleigh Laine",
+ *      "email": "kelleigh.maroney@gmail.com"
+ *     }
  */
 function create(req, res, next) {
   if(!req.body.name || !req.body.email) {
@@ -51,7 +66,24 @@ function create(req, res, next) {
 }
 
 /**
- * Get my info
+ * @api {get} user/me Get information about yourself
+ * @apiName me
+ * @apiGroup User
+ * @apiPermission must be logged in
+ * @apiSuccess {ObjectId} _id
+ * @apiSuccess {String} name,
+ * @apiSuccess {String} email
+ * @apiSuccess {String[]} interests
+ * @apiSuccess {ObjectId[]} bookmarks
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "_id": "012345678912",
+ *      "name": "Kelleigh Laine",
+ *      "email": "kelleigh.maroney@gmail.com",
+ *      "interests": ["technology", "politics"],
+ *      "bookmarks": ["123456789123", "234567891234"]
+ *     }
  */
 function me(req, res, next) {
   var userId = req.user._id;
@@ -69,7 +101,18 @@ function me(req, res, next) {
 }
 
 /**
- * Update user
+ * @api {put} user/ Update your user profile
+ * @apiName update
+ * @apiGroup User
+ * @apiPermission must be logged in
+ * @apiParam {String} name (optional)
+ * @apiParam {String[]} interests (optional)
+ * @apiParam {ObjectId[]} bookmarks (optional)
+ * @apiSuccess {ObjectId} _id
+ * @apiSuccess {String} name
+ * @apiSuccess {String} email
+ * @apiSuccess {String[]} interests
+ * @apiSuccess {ObjectId[]} bookmarks
  */
 function update(req, res, next) {
   var userId = req.user._id;

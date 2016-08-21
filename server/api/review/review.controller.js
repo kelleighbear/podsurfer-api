@@ -27,7 +27,39 @@ function handleError(res, statusCode) {
 }
 
 /**
- * Get all the reviews I've submitted
+ * @api {get} review/mine Get all the reviews I've submitted
+ * @apiName getMine
+ * @apiGroup Review
+ * @apiPermission must be logged in
+ * @apiSuccess {Object[]} reviews
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{
+ *         "_id": "012345678912",
+ *         "name": "It was... ok",
+ *         "podcast": '012345678918',
+ *         "episode": 'null',
+ *         "rating": 3,
+ *         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
+ *         "spoilers": "false"
+ *         "reviewer": {
+ *            _id: "012345678925",
+ *            name: "Kelleigh Maroney"
+*           }
+ *       },
+ *       {
+ *         "_id": "012345678915",
+ *         "name": "It was... awesome!!!",
+ *         "podcast": '012345678920',
+ *         "episode": 'null',
+ *         "rating": 5,
+ *         "review": "I thought it was just as thrilling as the description suggested!",
+ *         "spoilers": "false"
+ *         "reviewer": {
+ *            _id: "012345678925",
+ *            name: "Kelleigh Maroney"
+ *           }
+ *     }]
  */
 function getMine(req, res) {
     return Review.find({
@@ -39,8 +71,39 @@ function getMine(req, res) {
 }
 
 /**
- * Get one podcast
- */
+* @api {get} review/:id Get all the reviews for a specitic podcast
+* @apiName getForPodcast
+* @apiGroup Review
+* @apiSuccess {Object[]} reviews
+* @apiSuccessExample {json} Success-Response:
+*     HTTP/1.1 200 OK
+*     [{
+*         "_id": "012345678912",
+*         "name": "It was... ok",
+*         "podcast": '012345678918',
+*         "episode": 'null',
+*         "rating": 3,
+*         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
+*         "spoilers": "false"
+*         "reviewer": {
+*            _id: "012345678924",
+*            name: "Tyler Estes"
+*           }
+*       },
+*       {
+*         "_id": "012345678915",
+*         "name": "It was... awesome!!!",
+*         "podcast": '012345678918',
+*         "episode": 'null',
+*         "rating": 5,
+*         "review": "I thought it was just as thrilling as the description suggested!",
+*         "spoilers": "false"
+*         "reviewer": {
+*            _id: "012345678925",
+*            name: "Kelleigh Maroney"
+*           }
+*     }]
+*/
 function getForPodcast(req, res) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return res.status(500).send('Not a valid podcast ID');
@@ -54,11 +117,43 @@ function getForPodcast(req, res) {
 }
 
 /**
- * Create new podcast
- */
+* @api {post} review/ Create a new review
+* @apiName getForPodcast
+* @apiGroup Review
+* @apiPermission must be logged in
+* @apiParam {ObjectId} podcast (required)
+* @apiParam {String} name (required)
+* @apiParam {Number} episode (optional - if null, refers to the podcast as a whole, not a specific episode)
+* @apiParam {String} review (required)
+* @apiParam {Number} rating (required)
+* @apiParam {Boolean} spoilers (required)
+* @apiSuccess {ObjectId} _id
+* @apiSuccess {String} name
+* @apiSuccess {ObjectId} podcast
+* @apiSuccess {Number} episode
+* @apiSuccess {Number} rating
+* @apiSuccess {String} review
+* @apiSuccess {Boolean} spoilers
+* @apiSuccess {Object} reviewer
+* @apiSuccessExample {json} Success-Response:
+*     HTTP/1.1 200 OK
+*     [{
+*         "_id": "012345678912",
+*         "name": "It was... ok",
+*         "podcast": '012345678918',
+*         "episode": 'null',
+*         "rating": 3,
+*         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
+*         "spoilers": "false"
+*         "reviewer": {
+*            _id: "012345678924",
+*            name: "Tyler Estes"
+*           }
+*       }
+*/
 function create(req, res) {
-    if (!req.body.podcast || !req.body.review || !req.body.rating) {
-        return res.status(500).send('Review must include podcast id, rating, and text.');
+    if (!req.body.podcast || !req.body.name || !req.body.spoilers || !req.body.review || !req.body.rating) {
+        return res.status(500).send('Review must include podcast id, name, spoilers indicator, rating, and text.');
     }
     var newReview = new Review(req.body);
     newReview.reviewer = {
@@ -84,8 +179,40 @@ function create(req, res) {
 }
 
 /**
- * Update a podcast
- */
+* @api {put} review/:id Update one of your reviews
+* @apiName update
+* @apiGroup Review
+* @apiPermission must be logged in, review must be their own
+* @apiParam {ObjectId} podcast (optional)
+* @apiParam {String} name (optional)
+* @apiParam {Number} episode (optional - if null, refers to the podcast as a whole, not a specific episode)
+* @apiParam {String} review (optional)
+* @apiParam {Number} rating (optional)
+* @apiParam {Boolean} spoilers (optional)
+* @apiSuccess {ObjectId} _id
+* @apiSuccess {String} name
+* @apiSuccess {ObjectId} podcast
+* @apiSuccess {Number} episode
+* @apiSuccess {Number} rating
+* @apiSuccess {String} review
+* @apiSuccess {Boolean} spoilers
+* @apiSuccess {Object} reviewer
+* @apiSuccessExample {json} Success-Response:
+*     HTTP/1.1 200 OK
+*     [{
+*         "_id": "012345678912",
+*         "name": "It was... ok",
+*         "podcast": '012345678918',
+*         "episode": 'null',
+*         "rating": 3,
+*         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
+*         "spoilers": "false"
+*         "reviewer": {
+*            _id: "012345678924",
+*            name: "Tyler Estes"
+*           }
+*       }
+*/
 function update(req, res, next) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return res.status(500).send('Not a valid podcast ID');
@@ -112,7 +239,9 @@ function update(req, res, next) {
 }
 
 /**
- * Permanently remove a podcast
+ * @api {delete} review/:id Delete a review
+ * @apiName destroy
+ * @apiGroup Review
  */
 function destroy(req, res) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

@@ -116,41 +116,41 @@ function getForPodcast(req, res) {
         });
 }
 
-/**
-* @api {post} review/ Create a new review
-* @apiName getForPodcast
-* @apiGroup Review
-* @apiPermission must be logged in
-* @apiParam {ObjectId} podcast (required) ID of podcast the review is for
-* @apiParam {String} name (required) the name or title for the review
-* @apiParam {Number} episode (optional) the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
-* @apiParam {Number} rating (required) the score given to the review - you must decide and control the min/max scores allowed
-* @apiParam {String} review (required) the text of the review
-* @apiParam {Boolean} spoilers (required) flag for whether the review will contain spoilers or not
-* @apiSuccess {ObjectId} _id the review's unique ID
-* @apiSuccess {String} name the name or title for the review
-* @apiSuccess {ObjectId} podcast ID of podcast the review is for
-* @apiSuccess {Number} episode the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
-* @apiSuccess {Number} rating the score given to the review - you must decide and control the min/max scores allowed
-* @apiSuccess {String} review the text of the review
-* @apiSuccess {Boolean} spoilers flag for whether the review will contain spoilers or not
-* @apiSuccess {Object} reviewer the ID and name of the writer of the review
-* @apiSuccessExample {json} Success-Response:
-*     HTTP/1.1 200 OK
-*     [{
-*         "_id": "012345678912",
-*         "name": "It was... ok",
-*         "podcast": '012345678918',
-*         "episode": 'null',
-*         "rating": 3,
-*         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
-*         "spoilers": "false"
-*         "reviewer": {
-*            _id: "012345678924",
-*            name: "Tyler Estes"
-*           }
-*       }
-*/
+ /**
+ * @api {post} review/ Create a new review
+ * @apiName create
+ * @apiGroup Review
+ * @apiPermission must be logged in
+ * @apiParam {ObjectId} podcast (required) ID of podcast the review is for
+ * @apiParam {String} name (required) the name or title for the review
+ * @apiParam {Number} episode (optional) the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
+ * @apiParam {Number} rating (required) the score given to the review - you must decide and control the min/max scores allowed
+ * @apiParam {String} review (required) the text of the review
+ * @apiParam {Boolean} spoilers (required) flag for whether the review will contain spoilers or not
+ * @apiSuccess {ObjectId} _id the review's unique ID
+ * @apiSuccess {String} name the name or title for the review
+ * @apiSuccess {ObjectId} podcast ID of podcast the review is for
+ * @apiSuccess {Number} episode the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
+ * @apiSuccess {Number} rating the score given to the review - you must decide and control the min/max scores allowed
+ * @apiSuccess {String} review the text of the review
+ * @apiSuccess {Boolean} spoilers flag for whether the review will contain spoilers or not
+ * @apiSuccess {Object} reviewer the ID and name of the writer of the review
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{
+ *         "_id": "012345678912",
+ *         "name": "It was... ok",
+ *         "podcast": '012345678918',
+ *         "episode": 'null',
+ *         "rating": 3,
+ *         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
+ *         "spoilers": "false"
+ *         "reviewer": {
+ *             _id: "012345678924",
+ *            name: "Tyler Estes"
+ *           }
+ *       }
+ */
 function create(req, res) {
     if (!req.body.podcast || !req.body.review || !req.body.rating || !req.body.name || req.body.spoilers === undefined) {
         console.log(req.body);

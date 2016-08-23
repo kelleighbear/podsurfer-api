@@ -31,6 +31,11 @@ function handleError(res, statusCode) {
  * @apiName getMine
  * @apiGroup Review
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  * @apiSuccess {Object[]} reviews array of reviews you've written
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -121,6 +126,11 @@ function getForPodcast(req, res) {
  * @apiName create
  * @apiGroup Review
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  * @apiParam {ObjectId} podcast (required) ID of podcast the review is for
  * @apiParam {String} name (required) the name or title for the review
  * @apiParam {Number} episode (optional) the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
@@ -184,6 +194,11 @@ function create(req, res) {
 * @apiName update
 * @apiGroup Review
 * @apiPermission must be logged in, review must be their own
+* @apiHeader {String} Authorization  Bearer {TOKEN}
+* @apiHeaderExample {json} Header-Example:
+*     {
+*       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+*     }
 * @apiParam {ObjectId} podcast (optional) ID of podcast the review is for
 * @apiParam {String} name (optional) the name or title for the review
 * @apiParam {Number} episode (optional) the episode of the podcast the review is for - if null, refers to the podcast as a whole, not a specific episode
@@ -244,6 +259,11 @@ function update(req, res, next) {
  * @apiName destroy
  * @apiGroup Review
  * @apiPermission must be logged in, review must be their own
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  */
 function destroy(req, res) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

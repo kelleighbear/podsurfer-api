@@ -16,7 +16,7 @@ module.exports = {
   hasRole: hasRole,
   signToken: signToken,
   setTokenCookie: setTokenCookie
-}
+};
 
 /**
  * Attaches the user object to the request if authenticated

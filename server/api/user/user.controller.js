@@ -33,15 +33,11 @@ function handleError(res, statusCode) {
  * @apiParam {String} name (required) the new user's name
  * @apiParam {String} email (required) the new user's email
  * @apiParam {String} password (required) the new user's password
- * @apiSuccess {ObjectId} _id the new user's id
- * @apiSuccess {String} name the new user's name
- * @apiSuccess {String} email the new user's email address
+ * @apiSuccess {String} token the token to be used in the header of all subsequent api call, in this format: "Authorization: Bearer TOKEN"
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *      "_id": "012345678912",
- *      "name": "Kelleigh Laine",
- *      "email": "kelleigh.maroney@gmail.com"
+ *      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2JjNWMxMTRiNWY2NDExMDA0MzE3N2QiLCJpYXQiOjE0NzE5NjIxMjksImV4cCI6MTQ3MTk4MDEyOX0.biII7dGmEbpUvx2z0buKDUfgLt5CJehFiiXEfBpqRtg"
  *     }
  */
 function create(req, res, next) {
@@ -70,6 +66,11 @@ function create(req, res, next) {
  * @apiName me
  * @apiGroup User
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  * @apiSuccess {ObjectId} _id your unique user ID
  * @apiSuccess {String} name your name
  * @apiSuccess {String} email your email address
@@ -105,6 +106,11 @@ function me(req, res, next) {
  * @apiName update
  * @apiGroup User
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  * @apiParam {String} name (optional) your name
  * @apiParam {String[]} interests (optional) an array of your interests
  * @apiParam {ObjectId[]} bookmarks (optional) bookmarks an array of podcast IDs you've bookmarked

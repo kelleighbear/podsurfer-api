@@ -142,6 +142,11 @@ function getOne(req, res) {
  * @apiName create
  * @apiGroup Podcast
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  * @apiParam {String} name (required) the podcast name
  * @apiParam {String} link (optional) the link to listen to the podcast
  * @apiParam {Date} release (optional) the date the podcast was released
@@ -187,6 +192,11 @@ function create(req, res) {
  * @apiName update
  * @apiGroup Podcast
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  * @apiParam {String} name (optional) the podcast name
  * @apiParam {String} link (optional) the link to listen to the podcast
  * @apiParam {Date} release (optional) the date the podcast was released
@@ -257,6 +267,11 @@ function update(req, res, next) {
  * @apiName destroy
  * @apiGroup Podcast
  * @apiPermission must be logged in
+ * @apiHeader {String} Authorization  Bearer {TOKEN}
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1N2E4N2VlMzZkNTU4NjExMDAxZDU4NjEiLCJpYXQiOjE0NzA2NjAzNzQsImV4cCI6MTQ3MDY3ODM3NH0.uDTYHmoDaFEDVCOyggA2mt1L5f4vpubgg2d-_6rURQA"
+ *     }
  */
 function destroy(req, res) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

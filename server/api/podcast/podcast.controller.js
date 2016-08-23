@@ -27,7 +27,7 @@ function handleError(res, statusCode) {
 }
 
  /**
- * @api {get} podcast/ Get all the podcasts
+ * @api {get} api/podcast/ Get all the podcasts
  * @apiName getAll
  * @apiGroup Podcast
  * @apiSuccess {ObjectId} _id the podcast's unique ID
@@ -87,7 +87,7 @@ function getAll(req, res) {
 }
 
 /**
- * @api {get} podcast/:id Get one podcast
+ * @api {get} api/podcast/:id Get one podcast
  * @apiName getOne
  * @apiGroup Podcast
  * @apiSuccess {ObjectId} _id the podcast's unique ID
@@ -138,7 +138,7 @@ function getOne(req, res) {
 }
 
 /**
- * @api {post} podcast/ Create a new podcast
+ * @api {post} api/podcast/ Create a new podcast
  * @apiName create
  * @apiGroup Podcast
  * @apiPermission must be logged in
@@ -188,7 +188,7 @@ function create(req, res) {
 }
 
 /**
- * @api {put} podcast/:id Update a podcast
+ * @api {put} api/podcast/:id Update a podcast
  * @apiName update
  * @apiGroup Podcast
  * @apiPermission must be logged in
@@ -263,7 +263,7 @@ function update(req, res, next) {
 }
 
 /**
- * @api {delete} podcast/:id Delete a podcast
+ * @api {delete} api/podcast/:id Delete a podcast
  * @apiName destroy
  * @apiGroup Podcast
  * @apiPermission must be logged in

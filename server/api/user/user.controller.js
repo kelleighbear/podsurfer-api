@@ -27,7 +27,7 @@ function handleError(res, statusCode) {
 }
 
 /**
- * @api {post} user Create a new user
+ * @api {post} api/user Create a new user
  * @apiName create
  * @apiGroup User
  * @apiParam {String} name (required) the new user's name
@@ -62,7 +62,7 @@ function create(req, res, next) {
 }
 
 /**
- * @api {get} user/me Get information about myself
+ * @api {get} api/user/me Get information about myself
  * @apiName me
  * @apiGroup User
  * @apiPermission must be logged in
@@ -102,7 +102,7 @@ function me(req, res, next) {
 }
 
 /**
- * @api {put} user/ Update my user profile
+ * @api {put} api/user/ Update my user profile
  * @apiName update
  * @apiGroup User
  * @apiPermission must be logged in

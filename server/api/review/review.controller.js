@@ -27,7 +27,7 @@ function handleError(res, statusCode) {
 }
 
 /**
- * @api {get} review/mine Get all the reviews I've submitted
+ * @api {get} api/review/mine Get all the reviews I've submitted
  * @apiName getMine
  * @apiGroup Review
  * @apiPermission must be logged in
@@ -76,7 +76,7 @@ function getMine(req, res) {
 }
 
 /**
-* @api {get} review/:id Get all the reviews for a specific podcast
+* @api {get} api/review/:id Get all the reviews for a specific podcast
 * @apiName getForPodcast
 * @apiGroup Review
 * @apiSuccess {Object[]} reviews array of reviews written for specified podcast
@@ -122,7 +122,7 @@ function getForPodcast(req, res) {
 }
 
  /**
- * @api {post} review/ Create a new review
+ * @api {post} api/review/ Create a new review
  * @apiName create
  * @apiGroup Review
  * @apiPermission must be logged in
@@ -190,7 +190,7 @@ function create(req, res) {
 }
 
 /**
-* @api {put} review/:id Update one of my reviews
+* @api {put} api/review/:id Update one of my reviews
 * @apiName update
 * @apiGroup Review
 * @apiPermission must be logged in, review must be their own
@@ -255,7 +255,7 @@ function update(req, res, next) {
 }
 
 /**
- * @api {delete} review/:id Delete a review
+ * @api {delete} api/review/:id Delete a review
  * @apiName destroy
  * @apiGroup Review
  * @apiPermission must be logged in, review must be their own

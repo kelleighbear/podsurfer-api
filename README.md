@@ -1,6 +1,8 @@
 # podsurfer
 Public API for Baylor PodSurfer project
 
+https://codeship.com/projects/b70b1660-3fa9-0134-4e4b-5e760449ae25/status?branch=master
+
 # Generate API docs
 `apidoc -i server/ -o apidoc/`
 

@@ -7,23 +7,23 @@ const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
 module.exports = {
-  create: create,
-  me: me,
-  update: update
+    create: create,
+    me: me,
+    update: update
 };
 
 function validationError(res, statusCode) {
-  statusCode = statusCode || 422;
-  return function(err) {
-    res.status(statusCode).json(err);
-  };
+    statusCode = statusCode || 422;
+    return function(err) {
+        res.status(statusCode).json(err);
+    };
 }
 
 function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
+    statusCode = statusCode || 500;
+    return function(err) {
+        res.status(statusCode).send(err);
+    };
 }
 
 /**
@@ -41,24 +41,24 @@ function handleError(res, statusCode) {
  *     }
  */
 function create(req, res, next) {
-  if(!req.body.name || !req.body.email) {
-    return res.status(422).send('Users must have a name and email.');
-  }
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = 'user';
-  newUser.save()
-    .then(function(user) {
-      var token = jwt.sign({
-        _id: user._id
-      }, config.secrets.session, {
-        expiresIn: 60 * 60 * 5
-      });
-      res.json({
-        token
-      });
-    })
-    .catch(validationError(res));
+    if (!req.body.name || !req.body.email) {
+        return res.status(422).send('Users must have a name and email.');
+    }
+    var newUser = new User(req.body);
+    newUser.provider = 'local';
+    newUser.role = 'user';
+    newUser.save()
+        .then(function(user) {
+            var token = jwt.sign({
+                _id: user._id
+            }, config.secrets.session, {
+                expiresIn: 60 * 60 * 5
+            });
+            res.json({
+                token
+            });
+        })
+        .catch(validationError(res));
 }
 
 /**
@@ -87,18 +87,18 @@ function create(req, res, next) {
  *     }
  */
 function me(req, res, next) {
-  var userId = req.user._id;
+    var userId = req.user._id;
 
-  return User.findOne({
-      _id: userId
-    }, '-salt -password').exec()
-    .then(user => { // don't ever give out the password or salt
-      if (!user) {
-        return res.status(401).end();
-      }
-      res.json(user);
-    })
-    .catch(err => next(err));
+    return User.findOne({
+            _id: userId
+        }, '-salt -password').exec()
+        .then(user => { // don't ever give out the password or salt
+            if (!user) {
+                return res.status(401).end();
+            }
+            res.json(user);
+        })
+        .catch(err => next(err));
 }
 
 /**
@@ -130,26 +130,32 @@ function me(req, res, next) {
  *     }
  */
 function update(req, res, next) {
-  var userId = req.user._id;
+    var userId = req.user._id;
 
-  return User.findById(userId).exec()
-    .then(user => {
-      if (user !== null) {
-        user = _.merge(user, req.body);
-        return user.save({
-            new: true
-          })
-          .then(response => res.json(response))
-          .catch(err => next(err));
-      } else {
-        next('User was null');
-      }
-    });
+    return User.findById(userId).exec()
+        .then(user => {
+            if (user !== null) {
+                user = _.merge(user, req.body);
+                user.markModified('interests');
+                user.markModified('bookmarks');
+                return user.save({
+                        new: true
+                    })
+                    .then(response => {
+                        console.log('RESPONSE: ');
+                        console.log(response);
+                        res.json(response);
+                    })
+                    .catch(err => next(err));
+            } else {
+                next('User was null');
+            }
+        });
 }
 
 /**
  * Authentication callback
  */
 function authCallback(req, res, next) {
-  res.redirect('/');
+    res.redirect('/');
 }

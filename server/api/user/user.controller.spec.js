@@ -7,7 +7,7 @@ const request = require('supertest');
 const expect = require('chai').expect;
 const _ = require('lodash');
 
-describe('User Controller', function() {
+describe.only('User Controller', function() {
     let user;
 
     // Clear users before testing
@@ -156,6 +156,50 @@ describe('User Controller', function() {
                     expect(result.interests.length).to.equal(1);
                     expect(result.name).to.equal('Fake User');
                     done();
+                });
+        });
+
+        it('should get information about myself', function(done) {
+            request(app)
+                .get('/api/user/me')
+                .set('authorization', 'Bearer ' + token)
+                .expect(200)
+                .end((err, res) => {
+                  let result = res.body;
+                  expect(result.name).to.equal('Fake User');
+                  expect(result.interests.length).to.equal(1);
+                  done();
+                });
+        });
+
+        it('should update a user again', function(done) {
+            let updatedUser = _.merge(user, {
+                interests: ['technology', 'fashion', 'finance']
+            });
+            request(app)
+                .put('/api/user/')
+                .set('authorization', 'Bearer ' + token)
+                .send(updatedUser)
+                .expect(200)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    let result = res.body;
+                    expect(result.interests.length).to.equal(3);
+                    expect(result.name).to.equal('Fake User');
+                    done();
+                });
+        });
+
+        it('should get information about myself', function(done) {
+            request(app)
+                .get('/api/user/me')
+                .set('authorization', 'Bearer ' + token)
+                .expect(200)
+                .end((err, res) => {
+                  let result = res.body;
+                  expect(result.name).to.equal('Fake User');
+                  expect(result.interests.length).to.equal(3);
+                  done();
                 });
         });
     });

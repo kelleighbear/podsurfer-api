@@ -163,7 +163,6 @@ function getForPodcast(req, res) {
  */
 function create(req, res) {
     if (!req.body.podcast || !req.body.review || !req.body.rating || !req.body.name || req.body.spoilers === undefined) {
-        console.log(req.body);
         return res.status(500).send('Review must include podcast id, name, spoilers indicator, rating, and text.');
     }
     var newReview = new Review(req.body);

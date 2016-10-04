@@ -141,11 +141,7 @@ function update(req, res, next) {
                 return user.save({
                         new: true
                     })
-                    .then(response => {
-                        console.log('RESPONSE: ');
-                        console.log(response);
-                        res.json(response);
-                    })
+                    .then(response => res.json(response))
                     .catch(err => next(err));
             } else {
                 next('User was null');

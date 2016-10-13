@@ -136,8 +136,14 @@ function update(req, res, next) {
         .then(user => {
             if (user !== null) {
                 user = _.merge(user, req.body);
-                user.markModified('interests');
-                user.markModified('bookmarks');
+                if(req.body.interests !== user.interests) {
+                  user.interests = req.body.interests;
+                  user.markModified('interests');
+                }
+                if(req.body.bookmarks !== user.bookmarks) {
+                  user.bookmarks = req.body.bookmarks;
+                  user.markModified('bookmarks');
+                }
                 return user.save({
                         new: true
                     })

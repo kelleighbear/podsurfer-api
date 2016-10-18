@@ -48,7 +48,7 @@ function handleError(res, statusCode) {
  *         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
  *         "spoilers": "false"
  *         "reviewer": {
- *            _id: "012345678925",
+ *            id: "012345678925",
  *            name: "Kelleigh Maroney"
 *           }
  *       },
@@ -61,7 +61,7 @@ function handleError(res, statusCode) {
  *         "review": "I thought it was just as thrilling as the description suggested!",
  *         "spoilers": "false"
  *         "reviewer": {
- *            _id: "012345678925",
+ *            id: "012345678925",
  *            name: "Kelleigh Maroney"
  *           }
  *     }]
@@ -91,7 +91,7 @@ function getMine(req, res) {
 *         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
 *         "spoilers": "false"
 *         "reviewer": {
-*            _id: "012345678924",
+*            id: "012345678924",
 *            name: "Tyler Estes"
 *           }
 *       },
@@ -104,7 +104,7 @@ function getMine(req, res) {
 *         "review": "I thought it was just as thrilling as the description suggested!",
 *         "spoilers": "false"
 *         "reviewer": {
-*            _id: "012345678925",
+*            id: "012345678925",
 *            name: "Kelleigh Maroney"
 *           }
 *     }]
@@ -156,7 +156,7 @@ function getForPodcast(req, res) {
  *         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
  *         "spoilers": "false"
  *         "reviewer": {
- *             _id: "012345678924",
+ *             id: "012345678924",
  *            name: "Tyler Estes"
  *           }
  *       }
@@ -223,7 +223,7 @@ function create(req, res) {
 *         "review": "I thought it would be better, but it was ok. Not thrilling by any means.",
 *         "spoilers": "false"
 *         "reviewer": {
-*            _id: "012345678924",
+*            id: "012345678924",
 *            name: "Tyler Estes"
 *           }
 *       }

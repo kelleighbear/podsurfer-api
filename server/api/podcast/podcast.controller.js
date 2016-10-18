@@ -250,11 +250,16 @@ function update(req, res, next) {
         }).exec()
         .then(podcast => {
             if (podcast !== null) {
-                podcast = _.merge(podcast, req.body);
+
                 if(req.body.tags !== podcast.tags) {
                   podcast.tags = req.body.tags;
                   podcast.markModified('tags');
                 }
+                if(req.body.episodes !== podcast.episodes) {
+                  podcast.episodes = req.body.episodes;
+                  podcast.markModified('episodes');
+                }
+                podcast = _.merge(podcast, req.body);
 
                 return podcast.save({
                         new: true

@@ -251,11 +251,11 @@ function update(req, res, next) {
         .then(podcast => {
             if (podcast !== null) {
 
-                if(req.body.tags !== podcast.tags) {
+                if(req.body.tags && req.body.tags !== podcast.tags) {
                   podcast.tags = req.body.tags;
                   podcast.markModified('tags');
                 }
-                if(req.body.episodes !== podcast.episodes) {
+                if(req.body.episodes && req.body.episodes !== podcast.episodes) {
                   podcast.episodes = req.body.episodes;
                   podcast.markModified('episodes');
                 }

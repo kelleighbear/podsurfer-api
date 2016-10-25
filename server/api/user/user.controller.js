@@ -136,11 +136,11 @@ function update(req, res, next) {
         .then(user => {
             if (user !== null) {
                 user = _.merge(user, req.body);
-                if(req.body.interests !== user.interests) {
+                if(req.body.interests && req.body.interests !== user.interests) {
                   user.interests = req.body.interests;
                   user.markModified('interests');
                 }
-                if(req.body.bookmarks !== user.bookmarks) {
+                if(req.body.bookmarks && req.body.bookmarks !== user.bookmarks) {
                   user.bookmarks = req.body.bookmarks;
                   user.markModified('bookmarks');
                 }

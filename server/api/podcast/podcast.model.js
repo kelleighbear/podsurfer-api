@@ -17,7 +17,7 @@ var PodcastSchema = new Schema({
         name: String,
         link: String,
         description: String,
-        imageUrl: String,
+        imageURL: String,
         number: Number
     }],
     tags: [String],

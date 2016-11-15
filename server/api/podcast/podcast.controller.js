@@ -47,13 +47,13 @@ function handleError(res, statusCode) {
  *             "name": 'Early Childhood',
  *             "link": 'https://facebook.com',
  *             "description": 'My early life in 20 minutes',
- *             "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *             "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *         }, {
  *             "number": 2,
  *             "name": 'Late Childhood',
  *             "link": 'https://facebook.com',
  *             "description": 'My late childhood life in 20 minutes',
- *             "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *             "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *         }]
  *       },
  *       {
@@ -69,13 +69,13 @@ function handleError(res, statusCode) {
  *             "name": 'Early Childhood',
  *             "link": 'https://facebook.com',
  *             "description": 'My early life in 20 minutes',
- *             "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *             "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *         }, {
  *             "number": 2,
  *             "name": 'Late Childhood',
  *             "link": 'https://facebook.com',
  *             "description": 'My late childhood life in 20 minutes',
- *             "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *             "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *         }]
  *     }]
  */
@@ -99,7 +99,7 @@ function getAll(req, res) {
  * @apiSuccess {String} description the description or summary of the podcast
  * @apiSuccess {Object[]} episodes the array of episodes associated with the podcast
  * @apiSuccess {String[]} tags short words or phrases to help find a podcast, such as category or content
- * @apiSuccess {String} imageUrl a link to a picture to use for the podcast
+ * @apiSuccess {String} imageURL a link to a picture to use for the podcast
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -115,13 +115,13 @@ function getAll(req, res) {
  *           "name": 'Early Childhood',
  *           "link": 'https://facebook.com',
  *           "description": 'My early life in 20 minutes',
- *           "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *           "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *       }, {
  *           "number": 2,
  *           "name": 'Late Childhood',
  *           "link": 'https://facebook.com',
  *           "description": 'My late childhood life in 20 minutes',
- *           "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *           "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *       }]
  *     }
  */
@@ -155,7 +155,7 @@ function getOne(req, res) {
  * @apiParam {String} description (required) the description or summary of the podcast
  * @apiParam {Object[]} episodes (optional) the array of episodes associated with the podcast
  * @apiParam {String[]} tags (optional) short words or phrases to help find a podcast, such as category or content
- * @apiParam {String} imageUrl (optional) a link to a picture to use for the podcast
+ * @apiParam {String} imageURL (optional) a link to a picture to use for the podcast
  * @apiSuccess {ObjectId} _id the podcast's unique ID
  * @apiSuccess {String} name the podcast name
  * @apiSuccess {String} link the link to listen to the podcast
@@ -165,7 +165,7 @@ function getOne(req, res) {
  * @apiSuccess {String} description the description or summary of the podcast
  * @apiSuccess {Object[]} episodes the array of episodes associated with the podcast
  * @apiSuccess {String[]} tags short words or phrases to help find a podcast, such as category or content
- * @apiSuccess {String} imageUrl a link to a picture to use for the podcast
+ * @apiSuccess {String} imageURL a link to a picture to use for the podcast
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -205,7 +205,7 @@ function create(req, res) {
  * @apiParam {String} description (optional) the description or summary of the podcast
  * @apiParam {Object[]} episodes (optional) the array of episodes associated with the podcast
  * @apiParam {String[]} tags (optional) short words or phrases to help find a podcast, such as category or content
- * @apiParam {String} imageUrl (optional) a link to a picture to use for the podcast
+ * @apiParam {String} imageURL (optional) a link to a picture to use for the podcast
  * @apiSuccess {ObjectId} _id the podcast's unique ID
  * @apiSuccess {String} name the podcast name
  * @apiSuccess {String} link the link to listen to the podcast
@@ -215,7 +215,7 @@ function create(req, res) {
  * @apiSuccess {String} description the description or summary of the podcast
  * @apiSuccess {Object[]} episodes the array of episodes associated with the podcast
  * @apiSuccess {String[]} tags short words or phrases to help find a podcast, such as category or content
- * @apiSuccess {String} imageUrl a link to a picture to use for the podcast
+ * @apiSuccess {String} imageURL a link to a picture to use for the podcast
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -231,13 +231,13 @@ function create(req, res) {
  *           "name": 'Early Childhood',
  *           "link": 'https://facebook.com',
  *           "description": 'My early life in 20 minutes',
- *           "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *           "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *       }, {
  *           "number": 2,
  *           "name": 'Late Childhood',
  *           "link": 'https://facebook.com',
  *           "description": 'My late childhood life in 20 minutes',
- *           "imageUrl": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
+ *           "imageURL": 'https://www.credera.com/wp-content/uploads/2015/06/insights-thumbnail.jpg'
  *       }]
  *     }
  */
